@@ -20,14 +20,14 @@ if (usera === "my-tweets") {
 	client.get('search/tweets', {q: 'node.js'}, function(error, tweets, response) {
 	console.log(tweets);
 	});
-} else if (userb === "spotify-this-song" ){
-	spotify.search({ type: 'track', query: userb }, function(err, data) {
-	  if (err) {
-	    return console.log('Error occurred: ' + err);
-	  }
+} else if (usera === "spotify-this-song" ){
+spotify.search({ type: 'track', query: userb }, function(err, data) {
+  if (err) {
+    return console.log('Error occurred: ' + err);
+  }
 
-	console.log(data); 
-	});
+console.log(JSON.stringify(data)); 
+});
 } else {
 	return;
 }
