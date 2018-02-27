@@ -1,8 +1,10 @@
 require("dotenv").config();
+const OmdbApi = require('omdb-api-pt')
 var Spotify = require('node-spotify-api');
 var Twitter = require('twitter');
 var usera = process.argv[2];
 var userb = process.argv[3];
+
 
 var client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -15,6 +17,11 @@ var spotify = new Spotify({
   id: process.env.SPOTIFY_ID,
   secret: process.env.SPOTIFY_SECRET
 });
+
+const omdb = new OmdbApi({
+  apiKey: process.env.OMDB_KEY
+})
+
 
 if (usera === "my-tweets") {
 	client.get('search/tweets', {q: 'node.js'}, function(error, tweets, response) {
@@ -49,10 +56,22 @@ if (usera === "my-tweets") {
 
 
 
+} else if (usera === "movie-this"){
+	if (userb === undefined) {
+		console.log("If you haven't watched \"Mr. Nobody,\" then you should: http://www.imdb.com/title/tt0485947/ It's on Netflix!")
+	} else {
+
+			omdb.bySearch({
+			search: userb,
+			page: 1
+			}).then(res => console.log("Title: " + res.Search[0].Title + "\nYear: "+ res.Search[0].Year))
+			.catch(err => console.error(err))
+		
+	}
+	
 } else {
 	return;
 }
-
 
 
 // * `my-tweets`
