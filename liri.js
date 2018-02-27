@@ -21,17 +21,34 @@ if (usera === "my-tweets") {
 	console.log(tweets);
 	});
 } else if (usera === "spotify-this-song" ){
-spotify.search({ type: 'track', query: userb }, function(err, data) {
-  if (err) {
-    return console.log('Error occurred: ' + err);
-  }
+	if (userb === undefined) {
+	spotify.search({ type: 'track', query: "The Sign" }, function(err, data) {
+		if (err) {
+		return console.log('Error occurred: ' + err);
+		}
 
-// console.log(JSON.stringify(data)); 
-console.log(JSON.stringify("Spotify URL "+data.tracks.items[0].external_urls.spotify)); 
-console.log(JSON.stringify("Track Name "+data.tracks.items[0].name)); 
-console.log(JSON.stringify("Artist Name "+data.tracks.items[0].album.artists[0].name)); 
-console.log(JSON.stringify("Album Name "+data.tracks.items[0].album.name)); 
-});
+
+		console.log(JSON.stringify("Spotify URL "+data.tracks.items[0].external_urls.spotify)); 
+		console.log(JSON.stringify("Track Name "+data.tracks.items[0].name)); 
+		console.log(JSON.stringify("Artist Name "+data.tracks.items[0].album.artists[0].name)); 
+		console.log(JSON.stringify("Album Name "+data.tracks.items[0].album.name)); 
+	});
+	} else {
+		spotify.search({ type: 'track', query: userb }, function(err, data) {
+		if (err) {
+		return console.log('Error occurred: ' + err);
+		}
+
+
+		console.log(JSON.stringify("Spotify URL "+data.tracks.items[0].external_urls.spotify)); 
+		console.log(JSON.stringify("Track Name "+data.tracks.items[0].name)); 
+		console.log(JSON.stringify("Artist Name "+data.tracks.items[0].album.artists[0].name)); 
+		console.log(JSON.stringify("Album Name "+data.tracks.items[0].album.name)); 
+	});
+	}
+
+
+
 } else {
 	return;
 }
