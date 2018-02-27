@@ -2,6 +2,7 @@ require("dotenv").config();
 const OmdbApi = require('omdb-api-pt')
 var Spotify = require('node-spotify-api');
 var Twitter = require('twitter');
+const fs = require('fs');
 var usera = process.argv[2];
 var userb = process.argv[3];
 
@@ -69,7 +70,14 @@ if (usera === "my-tweets") {
 		
 	}
 	
+} else if (usera === "do-what-it-says"){
+	fs.readFile('random.txt', 'utf8', function(err, contents) {
+    console.log(contents);
+});
+
+
 } else {
+	console.log("you broke it")
 	return;
 }
 
